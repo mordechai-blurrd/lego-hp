@@ -1,0 +1,20 @@
+{
+  "name": "HP LEGO Builder",
+  "short_name": "HP Builder",
+  "description": "Build a LEGO Harry Potter figure by completing daily quests!",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0D0E1A",
+  "theme_color": "#0D0E1A",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["lifestyle", "productivity"],
+  "lang": "en"
+}
