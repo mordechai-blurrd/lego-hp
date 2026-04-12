@@ -1,0 +1,29 @@
+<svg viewBox="0 0 512 512" xmlns="http://www.w3.org/2000/svg">
+  <!-- Dark background -->
+  <rect width="512" height="512" rx="100" fill="#0D0E1A"/>
+  <!-- LEGO brick body (red) -->
+  <rect x="70" y="196" width="372" height="232" rx="22" fill="#C41E3A"/>
+  <!-- Brick bottom shadow -->
+  <rect x="70" y="388" width="372" height="40" fill="#8B1220"/>
+  <!-- Left stud -->
+  <ellipse cx="163" cy="196" rx="52" ry="20" fill="#A01830"/>
+  <rect x="111" y="156" width="104" height="42" fill="#A01830"/>
+  <ellipse cx="163" cy="156" rx="52" ry="20" fill="#C41E3A"/>
+  <ellipse cx="163" cy="152" rx="42" ry="16" fill="#D42848"/>
+  <!-- Center stud -->
+  <ellipse cx="256" cy="196" rx="52" ry="20" fill="#A01830"/>
+  <rect x="204" y="156" width="104" height="42" fill="#A01830"/>
+  <ellipse cx="256" cy="156" rx="52" ry="20" fill="#C41E3A"/>
+  <ellipse cx="256" cy="152" rx="42" ry="16" fill="#D42848"/>
+  <!-- Right stud -->
+  <ellipse cx="349" cy="196" rx="52" ry="20" fill="#A01830"/>
+  <rect x="297" y="156" width="104" height="42" fill="#A01830"/>
+  <ellipse cx="349" cy="156" rx="52" ry="20" fill="#C41E3A"/>
+  <ellipse cx="349" cy="152" rx="42" ry="16" fill="#D42848"/>
+  <!-- Lightning bolt in gold -->
+  <path d="M240 220 L210 310 L258 310 L224 400 L310 290 L258 290 L292 220 Z"
+    fill="#FFD700" stroke="#E8A800" stroke-width="4" stroke-linejoin="round"/>
+  <!-- Glow around bolt -->
+  <path d="M240 220 L210 310 L258 310 L224 400 L310 290 L258 290 L292 220 Z"
+    fill="none" stroke="rgba(255,220,0,0.3)" stroke-width="12" stroke-linejoin="round"/>
+</svg>
