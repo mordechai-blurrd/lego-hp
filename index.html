@@ -646,7 +646,7 @@
     <div id="figWrap">
       <svg id="figSvg" viewBox="0 0 200 320" xmlns="http://www.w3.org/2000/svg">
         <defs>
-          <!-- Red LEGO brick pattern (progress animation) -->
+          <!-- ══ Brick fill patterns (preserved) ══ -->
           <pattern id="brickPat" x="0" y="0" width="44" height="22" patternUnits="userSpaceOnUse">
             <rect x="1"   y="1"  width="20" height="9" rx="1.5" fill="#C41E3A"/>
             <rect x="23"  y="1"  width="20" height="9" rx="1.5" fill="#C41E3A"/>
@@ -654,8 +654,6 @@
             <rect x="12"  y="12" width="20" height="9" rx="1.5" fill="#A01830"/>
             <rect x="34"  y="12" width="20" height="9" rx="1.5" fill="#A01830"/>
           </pattern>
-
-          <!-- Ghost (unfilled) brick pattern -->
           <pattern id="ghostPat" x="0" y="0" width="44" height="22" patternUnits="userSpaceOnUse">
             <rect x="1"   y="1"  width="20" height="9" rx="1.5" fill="none" stroke="rgba(196,30,58,0.14)" stroke-width="1"/>
             <rect x="23"  y="1"  width="20" height="9" rx="1.5" fill="none" stroke="rgba(196,30,58,0.14)" stroke-width="1"/>
@@ -664,19 +662,152 @@
             <rect x="34"  y="12" width="20" height="9" rx="1.5" fill="none" stroke="rgba(196,30,58,0.11)" stroke-width="1"/>
           </pattern>
 
-          <!-- Soft glow filter -->
+          <!-- ══ Preserved filters ══ -->
           <filter id="glowF" x="-40%" y="-40%" width="180%" height="180%">
             <feGaussianBlur stdDeviation="3" result="blur"/>
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
-
-          <!-- Wand tip glow -->
           <filter id="wandF" x="-120%" y="-120%" width="340%" height="340%">
             <feGaussianBlur stdDeviation="5" result="blur"/>
             <feMerge><feMergeNode in="blur"/><feMergeNode in="SourceGraphic"/></feMerge>
           </filter>
 
-          <!-- Figure clip shape (all body parts) -->
+          <!-- ══ 3D lighting filters ══ -->
+          <filter id="figShadow" x="-30%" y="-5%" width="170%" height="130%">
+            <feDropShadow dx="5" dy="9" stdDeviation="9" flood-color="rgba(0,0,0,0.65)"/>
+          </filter>
+          <filter id="aoBlur" x="-60%" y="-60%" width="220%" height="220%">
+            <feGaussianBlur stdDeviation="3"/>
+          </filter>
+
+          <!-- ══ 3D Gradients — light source: upper-left ══ -->
+
+          <!-- Head: radial, warm light upper-left → cool dark lower-right -->
+          <radialGradient id="gHead" cx="36%" cy="30%" r="72%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="#FFF3B0"/>
+            <stop offset="38%"  stop-color="#F5C518"/>
+            <stop offset="72%"  stop-color="#D4A500"/>
+            <stop offset="100%" stop-color="#906C00"/>
+          </radialGradient>
+
+          <!-- Head right-side face edge -->
+          <linearGradient id="gHeadSide" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#B88E00"/>
+            <stop offset="100%" stop-color="#6A4C00"/>
+          </linearGradient>
+
+          <!-- Stud top face -->
+          <radialGradient id="gStudTop" cx="36%" cy="33%" r="68%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="#FFE966"/>
+            <stop offset="55%"  stop-color="#F5C518"/>
+            <stop offset="100%" stop-color="#B89000"/>
+          </radialGradient>
+
+          <!-- Stud cylinder side -->
+          <linearGradient id="gStudCyl" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#FFE040"/>
+            <stop offset="28%"  stop-color="#F5C518"/>
+            <stop offset="68%"  stop-color="#C09400"/>
+            <stop offset="100%" stop-color="#806000"/>
+          </linearGradient>
+
+          <!-- Neck yellow -->
+          <linearGradient id="gNeck" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#FFE040"/>
+            <stop offset="45%"  stop-color="#F5C518"/>
+            <stop offset="100%" stop-color="#BF9000"/>
+          </linearGradient>
+
+          <!-- Torso: diagonal top-left bright → bottom-right dark -->
+          <linearGradient id="gTorso" x1="8%" y1="4%" x2="92%" y2="96%">
+            <stop offset="0%"   stop-color="#3E3E3E"/>
+            <stop offset="22%"  stop-color="#252525"/>
+            <stop offset="60%"  stop-color="#141414"/>
+            <stop offset="100%" stop-color="#040404"/>
+          </linearGradient>
+
+          <!-- Torso right-side face -->
+          <linearGradient id="gTorsoSide" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#1A1A1A"/>
+            <stop offset="100%" stop-color="#040404"/>
+          </linearGradient>
+
+          <!-- Left arm: cylindrical — bright left, dark right -->
+          <linearGradient id="gArmL" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#4A4A4A"/>
+            <stop offset="22%"  stop-color="#2E2E2E"/>
+            <stop offset="62%"  stop-color="#181818"/>
+            <stop offset="100%" stop-color="#050505"/>
+          </linearGradient>
+
+          <!-- Right arm: slightly darker (away from light) -->
+          <linearGradient id="gArmR" x1="0%" y1="0%" x2="100%" y2="0%">
+            <stop offset="0%"   stop-color="#303030"/>
+            <stop offset="40%"  stop-color="#1C1C1C"/>
+            <stop offset="100%" stop-color="#060606"/>
+          </linearGradient>
+
+          <!-- Hand: warm yellow radial -->
+          <radialGradient id="gHand" cx="33%" cy="28%" r="78%" gradientUnits="objectBoundingBox">
+            <stop offset="0%"   stop-color="#FFE870"/>
+            <stop offset="48%"  stop-color="#F5C518"/>
+            <stop offset="100%" stop-color="#A07800"/>
+          </radialGradient>
+
+          <!-- Hip connector -->
+          <linearGradient id="gHip" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#2A2A2A"/>
+            <stop offset="45%"  stop-color="#181818"/>
+            <stop offset="100%" stop-color="#050505"/>
+          </linearGradient>
+
+          <!-- Left leg -->
+          <linearGradient id="gLegL" x1="10%" y1="4%" x2="90%" y2="96%">
+            <stop offset="0%"   stop-color="#323232"/>
+            <stop offset="38%"  stop-color="#1C1C1C"/>
+            <stop offset="100%" stop-color="#040404"/>
+          </linearGradient>
+
+          <!-- Right leg -->
+          <linearGradient id="gLegR" x1="10%" y1="4%" x2="90%" y2="96%">
+            <stop offset="0%"   stop-color="#282828"/>
+            <stop offset="38%"  stop-color="#181818"/>
+            <stop offset="100%" stop-color="#040404"/>
+          </linearGradient>
+
+          <!-- Foot -->
+          <linearGradient id="gFoot" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="#262626"/>
+            <stop offset="100%" stop-color="#050505"/>
+          </linearGradient>
+
+          <!-- White shirt -->
+          <linearGradient id="gShirt" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#FFFFFF"/>
+            <stop offset="100%" stop-color="#D0D0D0"/>
+          </linearGradient>
+
+          <!-- Tie red -->
+          <linearGradient id="gTie" x1="22%" y1="0%" x2="78%" y2="100%">
+            <stop offset="0%"   stop-color="#E83258"/>
+            <stop offset="50%"  stop-color="#C41E3A"/>
+            <stop offset="100%" stop-color="#780010"/>
+          </linearGradient>
+
+          <!-- Crest red -->
+          <linearGradient id="gCrestRed" x1="0%" y1="0%" x2="100%" y2="100%">
+            <stop offset="0%"   stop-color="#A80000"/>
+            <stop offset="100%" stop-color="#540000"/>
+          </linearGradient>
+
+          <!-- Plastic sheen overlay: top-half bright, fades to transparent -->
+          <linearGradient id="gSheen" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%"   stop-color="rgba(255,255,255,0.30)"/>
+            <stop offset="55%"  stop-color="rgba(255,255,255,0.05)"/>
+            <stop offset="100%" stop-color="rgba(255,255,255,0)"/>
+          </linearGradient>
+
+          <!-- Figure clip path (preserved for brick animation) -->
           <clipPath id="figureClip">
             <rect x="65" y="22" width="70" height="58" rx="12"/>
             <rect x="82" y="78" width="36" height="18"/>
@@ -698,83 +829,218 @@
           <rect x="-10" y="0" width="220" height="320" fill="url(#ghostPat)"/>
         </g>
 
-        <!-- ── Layer 1: Base figure — realistic HP LEGO minifigure ── -->
+        <!-- ── Ground shadow ── -->
+        <ellipse cx="101" cy="316" rx="62" ry="7" fill="rgba(0,0,0,0.42)" filter="url(#aoBlur)"/>
 
-        <!-- Head (LEGO classic yellow) -->
-        <rect x="65" y="22" width="70" height="58" rx="12" fill="#F5C518"/>
-        <!-- Head stud (LEGO knob on top) -->
-        <ellipse cx="100" cy="22" rx="14" ry="5.5" fill="#DDB010"/>
-        <ellipse cx="100" cy="19.5" rx="10" ry="3.5" fill="#F5C518"/>
+        <!-- ════════════════════════════════════════ -->
+        <!--   3D BODY — drawn back-to-front         -->
+        <!--   Drop shadow wraps the whole figure    -->
+        <!-- ════════════════════════════════════════ -->
+        <g filter="url(#figShadow)">
 
-        <!-- Neck (yellow) -->
-        <rect x="82" y="78" width="36" height="18" fill="#F5C518"/>
-        <!-- White shirt collar at top of neck -->
-        <rect x="82" y="78" width="36" height="9" fill="#F0F0F0"/>
+          <!-- ── FEET ── -->
+          <!-- Left foot -->
+          <rect x="41" y="283" width="55" height="22" rx="6" fill="url(#gFoot)"/>
+          <rect x="90" y="284" width="5"  height="20" rx="2" fill="#080808"/>
+          <rect x="43" y="283" width="47" height="4"  rx="2" fill="rgba(255,255,255,0.09)"/>
+          <rect x="43" y="299" width="47" height="5"  rx="2" fill="rgba(0,0,0,0.45)"/>
 
-        <!-- Torso base: black Hogwarts robe -->
-        <rect x="45" y="94" width="110" height="86" rx="3" fill="#1E1E1E"/>
+          <!-- Right foot -->
+          <rect x="104" y="283" width="55" height="22" rx="6" fill="url(#gFoot)"/>
+          <rect x="153" y="284" width="5"  height="20" rx="2" fill="#070707"/>
+          <rect x="106" y="283" width="47" height="4"  rx="2" fill="rgba(255,255,255,0.08)"/>
+          <rect x="106" y="299" width="47" height="5"  rx="2" fill="rgba(0,0,0,0.42)"/>
 
-        <!-- White shirt showing in open-front robe (V-area) -->
-        <polygon points="100,94 120,96 117,175 83,175 80,96" fill="#F0F0F0"/>
+          <!-- ── LEGS ── -->
+          <!-- Foot-leg AO -->
+          <rect x="45" y="276" width="110" height="10" fill="rgba(0,0,0,0.3)" filter="url(#aoBlur)"/>
 
-        <!-- Left robe lapel (black, over white shirt) -->
-        <polygon points="45,94 91,94 87,138 68,180 45,180" fill="#1E1E1E"/>
+          <!-- Left leg -->
+          <rect x="45" y="198" width="48" height="90" fill="url(#gLegL)"/>
+          <!-- Left leg right edge -->
+          <rect x="89" y="199" width="4" height="88" fill="#0A0A0A"/>
+          <!-- Left leg sheen -->
+          <rect x="46" y="199" width="46" height="32" fill="url(#gSheen)" opacity="0.75"/>
+          <!-- Left leg specular -->
+          <ellipse cx="58" cy="214" rx="8" ry="5" fill="rgba(255,255,255,0.12)"/>
 
-        <!-- Right robe lapel (black, over white shirt) -->
-        <polygon points="155,94 109,94 113,138 132,180 155,180" fill="#1E1E1E"/>
+          <!-- Right leg -->
+          <rect x="107" y="198" width="48" height="90" fill="url(#gLegR)"/>
+          <rect x="151" y="199" width="4" height="88" fill="#080808"/>
+          <rect x="108" y="199" width="46" height="32" fill="url(#gSheen)" opacity="0.65"/>
+          <ellipse cx="120" cy="214" rx="8" ry="5" fill="rgba(255,255,255,0.10)"/>
 
-        <!-- Thin white collar edge visible at V-opening -->
-        <line x1="91" y1="94" x2="100" y2="112" stroke="#CCCCCC" stroke-width="1"/>
-        <line x1="109" y1="94" x2="100" y2="112" stroke="#CCCCCC" stroke-width="1"/>
+          <!-- Leg gap / separator -->
+          <rect x="99" y="198" width="4" height="90" fill="#050505"/>
 
-        <!-- Gryffindor tie — red with gold stripes (center of shirt) -->
-        <!-- Tie knot -->
-        <polygon points="97,100 103,100 105,108 100,111 95,108" fill="#C41E3A"/>
-        <!-- Tie blade (slightly tapering) -->
-        <polygon points="95,108 105,108 106,162 94,162" fill="#C41E3A"/>
-        <!-- Gold horizontal stripes on tie -->
-        <rect x="95.5" y="119" width="9"  height="2.5" rx="0.5" fill="#FFD700"/>
-        <rect x="95.5" y="130" width="9"  height="2.5" rx="0.5" fill="#FFD700"/>
-        <rect x="95.5" y="141" width="9"  height="2.5" rx="0.5" fill="#FFD700"/>
-        <rect x="95.5" y="152" width="9"  height="2.5" rx="0.5" fill="#FFD700"/>
+          <!-- ── HIP CONNECTOR ── -->
+          <!-- AO under torso -->
+          <rect x="46" y="194" width="108" height="8" fill="rgba(0,0,0,0.38)" filter="url(#aoBlur)"/>
 
-        <!-- Gryffindor crest on left breast (shield with lion) -->
-        <g id="crestGroup">
-          <!-- Shield outline -->
-          <path d="M55 102 L77 102 L77 122 L66 132 L55 122 Z" fill="#8B0000"/>
-          <!-- Top half gold bar (Gryffindor division) -->
-          <path d="M55 102 L77 102 L77 113 L55 113 Z" fill="#FFD700"/>
-          <!-- Shield border -->
-          <path d="M55 102 L77 102 L77 122 L66 132 L55 122 Z" fill="none" stroke="#C8A400" stroke-width="1.5"/>
-          <!-- Rampant lion (simplified star shape in gold) -->
-          <path d="M66 115 L67.8 121 L74 121 L68.8 124.8 L70.7 131 L66 127.2 L61.3 131 L63.2 124.8 L58 121 L64.2 121 Z"
-            fill="#FFD700"/>
-        </g>
+          <rect x="45" y="178" width="110" height="22" fill="url(#gHip)"/>
+          <!-- Hip right edge -->
+          <rect x="151" y="179" width="4"   height="21" fill="#0A0A0A"/>
+          <!-- Hip top edge highlight -->
+          <rect x="46"  y="179" width="108" height="4"  fill="rgba(255,255,255,0.13)"/>
+          <!-- Hip bottom AO (into legs) -->
+          <rect x="46"  y="195" width="108" height="5"  fill="rgba(0,0,0,0.36)"/>
 
-        <!-- Left arm (black robe sleeve) -->
-        <rect x="22" y="94" width="26" height="65" rx="4" fill="#1E1E1E"/>
-        <!-- Left LEGO C-hand (yellow) -->
-        <rect x="18" y="155" width="32" height="22" rx="9" fill="#F5C518"/>
+          <!-- ── TORSO ── -->
+          <rect x="45" y="94" width="110" height="86" rx="3" fill="url(#gTorso)"/>
 
-        <!-- Right arm (black robe sleeve) -->
-        <rect x="152" y="94" width="26" height="65" rx="4" fill="#1E1E1E"/>
-        <!-- Right LEGO C-hand (yellow) -->
-        <rect x="150" y="155" width="32" height="22" rx="9" fill="#F5C518"/>
+          <!-- Torso right edge face -->
+          <rect x="151" y="95" width="4" height="84" rx="1" fill="url(#gTorsoSide)"/>
 
-        <!-- Hips connector (black) -->
-        <rect x="45" y="178" width="110" height="22" fill="#1E1E1E"/>
+          <!-- White shirt V panel -->
+          <polygon points="100,94 120,97 117,178 83,178 80,97" fill="url(#gShirt)"/>
 
-        <!-- Left leg (black) -->
-        <rect x="45" y="198" width="48" height="90" fill="#141414"/>
-        <!-- Right leg (black) -->
-        <rect x="107" y="198" width="48" height="90" fill="#141414"/>
-        <!-- Leg separator -->
-        <line x1="101" y1="198" x2="101" y2="288" stroke="#0A0A0A" stroke-width="3"/>
+          <!-- Left robe panel (toward light → slightly lighter) -->
+          <polygon points="45,94 91,94 87,140 68,180 45,180" fill="#232323"/>
+          <!-- Left panel rim-light edge -->
+          <line x1="45" y1="94" x2="68" y2="180" stroke="rgba(255,255,255,0.09)" stroke-width="2.5"/>
 
-        <!-- Left foot -->
-        <rect x="41"  y="283" width="55" height="22" rx="6" fill="#0E0E0E"/>
-        <!-- Right foot -->
-        <rect x="104" y="283" width="55" height="22" rx="6" fill="#0E0E0E"/>
+          <!-- Right robe panel (away from light → darker) -->
+          <polygon points="155,94 109,94 113,140 132,180 155,180" fill="#121212"/>
+
+          <!-- Collar V edges -->
+          <line x1="91"  y1="94" x2="100" y2="113" stroke="rgba(200,200,200,0.5)" stroke-width="1.5"/>
+          <line x1="109" y1="94" x2="100" y2="113" stroke="rgba(200,200,200,0.5)" stroke-width="1.5"/>
+
+          <!-- ── TIE ── -->
+          <polygon points="97,100 103,100 105,108 100,111 95,108" fill="url(#gTie)"/>
+          <!-- Knot specular -->
+          <polygon points="97,100 100,101 101,105 100,108 97.5,105" fill="rgba(255,130,130,0.22)"/>
+          <!-- Tie blade -->
+          <polygon points="95,108 105,108 106.5,165 93.5,165" fill="url(#gTie)"/>
+          <!-- Tie left edge specular line -->
+          <line x1="97" y1="113" x2="95.5" y2="152" stroke="rgba(255,140,140,0.25)" stroke-width="1.5" stroke-linecap="round"/>
+          <!-- Gold stripes -->
+          <rect x="95.5" y="119" width="9" height="2.5" rx="0.5" fill="#FFD700"/>
+          <rect x="95.5" y="130" width="9" height="2.5" rx="0.5" fill="#FFD700"/>
+          <rect x="95.5" y="141" width="9" height="2.5" rx="0.5" fill="#FFD700"/>
+          <rect x="95.5" y="152" width="9" height="2.5" rx="0.5" fill="#FFD700"/>
+          <!-- Gold stripe highlight -->
+          <rect x="95.5" y="119" width="9" height="1" rx="0.5" fill="rgba(255,255,200,0.55)"/>
+          <rect x="95.5" y="130" width="9" height="1" rx="0.5" fill="rgba(255,255,200,0.55)"/>
+          <rect x="95.5" y="141" width="9" height="1" rx="0.5" fill="rgba(255,255,200,0.55)"/>
+
+          <!-- ── GRYFFINDOR CREST ── -->
+          <g id="crestGroup">
+            <path d="M55 102 L77 102 L77 122 L66 132 L55 122 Z" fill="url(#gCrestRed)"/>
+            <path d="M55 102 L77 102 L77 113 L55 113 Z" fill="#FFD700"/>
+            <rect x="55.5" y="102.5" width="21" height="4" fill="rgba(255,255,200,0.42)"/>
+            <path d="M55 102 L77 102 L77 122 L66 132 L55 122 Z" fill="none" stroke="#C8A000" stroke-width="1.5"/>
+            <ellipse cx="61" cy="107" rx="5" ry="3" fill="rgba(255,255,255,0.18)"/>
+            <path d="M66 115 L67.8 121 L74 121 L68.8 124.8 L70.7 131 L66 127.2 L61.3 131 L63.2 124.8 L58 121 L64.2 121 Z" fill="#FFD700"/>
+            <path d="M66 115 L67.2 119 L71 119 L67.8 121.5 L68.8 125 L66 123.2 Z" fill="rgba(255,255,200,0.38)"/>
+          </g>
+
+          <!-- Torso top edge catch-light -->
+          <rect x="46" y="94" width="108" height="4" rx="1" fill="rgba(255,255,255,0.17)"/>
+          <!-- Torso plastic sheen -->
+          <rect x="46" y="95" width="108" height="44" rx="2" fill="url(#gSheen)" opacity="0.62"/>
+          <!-- Torso specular blob (upper-left, on robe) -->
+          <ellipse cx="63" cy="110" rx="9" ry="6" fill="rgba(255,255,255,0.11)"/>
+
+          <!-- ── ARMS ── -->
+
+          <!-- LEFT ARM — shoulder ball cap -->
+          <ellipse cx="35" cy="97" rx="14" ry="6"  fill="#2C2C2C"/>
+          <ellipse cx="32" cy="96" rx="7"  ry="2.8" fill="rgba(255,255,255,0.15)"/>
+          <!-- AO at left shoulder -->
+          <ellipse cx="35" cy="98" rx="14" ry="5" fill="rgba(0,0,0,0.45)" filter="url(#aoBlur)"/>
+
+          <rect x="22" y="94" width="26" height="65" rx="4" fill="url(#gArmL)"/>
+          <!-- Arm inner edge (against body) -->
+          <rect x="44" y="96" width="4" height="62" rx="1" fill="#090909"/>
+          <!-- Arm outer highlight edge -->
+          <rect x="22" y="96" width="3" height="62" rx="1" fill="rgba(255,255,255,0.10)"/>
+          <!-- Arm sheen -->
+          <rect x="23" y="96" width="24" height="24" rx="2" fill="url(#gSheen)" opacity="0.75"/>
+          <!-- Arm specular -->
+          <ellipse cx="32" cy="109" rx="7" ry="4" fill="rgba(255,255,255,0.16)"/>
+
+          <!-- RIGHT ARM — shoulder ball cap -->
+          <ellipse cx="165" cy="97" rx="14" ry="6"  fill="#262626"/>
+          <ellipse cx="162" cy="96" rx="7"  ry="2.8" fill="rgba(255,255,255,0.11)"/>
+          <ellipse cx="165" cy="98" rx="14" ry="5" fill="rgba(0,0,0,0.4)" filter="url(#aoBlur)"/>
+
+          <rect x="152" y="94" width="26" height="65" rx="4" fill="url(#gArmR)"/>
+          <rect x="174" y="96" width="4"  height="62" rx="1" fill="#070707"/>
+          <rect x="152" y="96" width="3"  height="62" rx="1" fill="rgba(255,255,255,0.07)"/>
+          <rect x="153" y="96" width="24" height="24" rx="2" fill="url(#gSheen)" opacity="0.65"/>
+          <ellipse cx="162" cy="109" rx="7" ry="4" fill="rgba(255,255,255,0.13)"/>
+
+          <!-- ── HANDS (C-shape) ── -->
+
+          <!-- Left wrist AO -->
+          <ellipse cx="34" cy="157" rx="15" ry="4.5" fill="rgba(0,0,0,0.38)" filter="url(#aoBlur)"/>
+          <!-- Left hand -->
+          <rect x="18" y="155" width="32" height="22" rx="9" fill="url(#gHand)"/>
+          <!-- Top edge catch-light -->
+          <rect x="19" y="156" width="30" height="5" rx="4" fill="rgba(255,255,255,0.32)"/>
+          <!-- Specular blob -->
+          <ellipse cx="28" cy="161" rx="6.5" ry="3.5" fill="rgba(255,255,255,0.52)"/>
+          <!-- Sharp specular core -->
+          <ellipse cx="25" cy="159" rx="2.5" ry="1.5" fill="rgba(255,255,255,0.85)"/>
+
+          <!-- Right wrist AO -->
+          <ellipse cx="166" cy="157" rx="15" ry="4.5" fill="rgba(0,0,0,0.34)" filter="url(#aoBlur)"/>
+          <!-- Right hand -->
+          <rect x="150" y="155" width="32" height="22" rx="9" fill="url(#gHand)"/>
+          <rect x="151" y="156" width="30" height="5" rx="4" fill="rgba(255,255,255,0.28)"/>
+          <ellipse cx="160" cy="161" rx="6.5" ry="3.5" fill="rgba(255,255,255,0.46)"/>
+          <ellipse cx="157" cy="159" rx="2.5" ry="1.5" fill="rgba(255,255,255,0.78)"/>
+
+          <!-- ── NECK ── -->
+          <!-- Head-neck AO -->
+          <rect x="82" y="77" width="36" height="5" fill="rgba(0,0,0,0.32)" filter="url(#aoBlur)"/>
+          <rect x="82" y="78" width="36" height="18" fill="url(#gNeck)"/>
+          <!-- White collar -->
+          <rect x="82" y="82" width="36" height="13" fill="rgba(242,242,242,0.94)"/>
+          <!-- Collar sheen -->
+          <rect x="83" y="83" width="34" height="5" rx="1" fill="rgba(255,255,255,0.5)"/>
+
+          <!-- ── HEAD ── -->
+          <!-- Head-neck AO (bottom of head) -->
+          <rect x="66" y="74" width="68" height="8" fill="rgba(0,0,0,0.28)" filter="url(#aoBlur)"/>
+
+          <!-- Head main face -->
+          <rect x="65" y="22" width="70" height="58" rx="12" fill="url(#gHead)"/>
+
+          <!-- Right-side face (3D edge thickness) -->
+          <rect x="133" y="25" width="5" height="52" rx="2" fill="url(#gHeadSide)"/>
+          <!-- Top edge face -->
+          <rect x="67" y="22" width="66" height="6" rx="5" fill="#FFEEC0" opacity="0.58"/>
+
+          <!-- Plastic sheen — large soft blob upper-left -->
+          <ellipse cx="83" cy="36" rx="23" ry="17" fill="rgba(255,255,255,0.17)"/>
+          <!-- Sharp specular highlight -->
+          <ellipse cx="77" cy="29" rx="10" ry="6" fill="rgba(255,255,255,0.55)"/>
+          <!-- Specular bright core -->
+          <ellipse cx="75" cy="27" rx="4.5" ry="2.5" fill="rgba(255,255,255,0.88)"/>
+          <!-- Bottom rim AO -->
+          <rect x="67" y="74" width="66" height="6" rx="3" fill="rgba(0,0,0,0.20)"/>
+          <!-- Head outline (subtle) -->
+          <rect x="65" y="22" width="70" height="58" rx="12" fill="none" stroke="rgba(110,80,0,0.5)" stroke-width="1.5"/>
+
+          <!-- ── STUD (LEGO knob atop head) ── -->
+          <!-- Cylinder side body -->
+          <rect x="86" y="10" width="28" height="14" rx="5" fill="url(#gStudCyl)"/>
+          <!-- Right side face -->
+          <rect x="112" y="11" width="3" height="12" rx="1.5" fill="rgba(100,72,0,0.65)"/>
+          <!-- Top ellipse face -->
+          <ellipse cx="100" cy="10" rx="14" ry="5.5" fill="url(#gStudTop)"/>
+          <!-- Stud rim ring -->
+          <ellipse cx="100" cy="10" rx="14" ry="5.5" fill="none" stroke="rgba(150,108,0,0.7)" stroke-width="1.2"/>
+          <!-- Inner hollow (LEGO studs are hollow) -->
+          <ellipse cx="100" cy="10" rx="7" ry="2.8" fill="rgba(0,0,0,0.18)"/>
+          <!-- Stud specular -->
+          <ellipse cx="94" cy="7.5" rx="6.5" ry="2.5" fill="rgba(255,255,255,0.65)"/>
+          <!-- Stud specular bright core -->
+          <ellipse cx="92" cy="6.8" rx="2.8" ry="1.2" fill="rgba(255,255,255,0.92)"/>
+
+        </g><!-- end figShadow group -->
 
         <!-- ── Layer 2: Animated brick fill ── -->
         <g clip-path="url(#figureClip)">
@@ -792,41 +1058,54 @@
         <!-- Eye whites -->
         <circle cx="86"  cy="53" r="6.5" fill="white"/>
         <circle cx="114" cy="53" r="6.5" fill="white"/>
-        <!-- Pupils (green eyes for Harry!) -->
-        <circle cx="87"  cy="54" r="4"   fill="#2D6A2D"/>
-        <circle cx="115" cy="54" r="4"   fill="#2D6A2D"/>
+        <circle cx="86"  cy="53" r="6.5" fill="none" stroke="rgba(160,120,0,0.28)" stroke-width="1"/>
+        <circle cx="114" cy="53" r="6.5" fill="none" stroke="rgba(160,120,0,0.28)" stroke-width="1"/>
+        <!-- Pupils (green eyes) -->
+        <circle cx="87"  cy="54" r="4" fill="#2D6A2D"/>
+        <circle cx="115" cy="54" r="4" fill="#2D6A2D"/>
+        <circle cx="87"  cy="54" r="4" fill="none" stroke="#1A4A1A" stroke-width="0.6"/>
+        <circle cx="115" cy="54" r="4" fill="none" stroke="#1A4A1A" stroke-width="0.6"/>
         <!-- Dark pupil centers -->
         <circle cx="87"  cy="54" r="2.2" fill="#0A0A00"/>
         <circle cx="115" cy="54" r="2.2" fill="#0A0A00"/>
-        <!-- Eye shine -->
-        <circle cx="88.5"  cy="52" r="1.3" fill="white"/>
-        <circle cx="116.5" cy="52" r="1.3" fill="white"/>
+        <!-- Eye shine — two specular dots per eye -->
+        <circle cx="88.5"  cy="51.5" r="1.5" fill="white"/>
+        <circle cx="86.8"  cy="55.2" r="0.8" fill="rgba(255,255,255,0.5)"/>
+        <circle cx="116.5" cy="51.5" r="1.5" fill="white"/>
+        <circle cx="114.8" cy="55.2" r="0.8" fill="rgba(255,255,255,0.5)"/>
 
-        <!-- Round glasses — dark wire frames (matching actual HP LEGO minifig) -->
+        <!-- Round glasses — wire frames -->
         <circle id="glassesL" cx="86"  cy="53" r="11" fill="none" stroke="#1A1A1A" stroke-width="2.8"/>
         <circle id="glassesR" cx="114" cy="53" r="11" fill="none" stroke="#1A1A1A" stroke-width="2.8"/>
+        <!-- Lens tint (subtle glass) -->
+        <circle cx="86"  cy="53" r="10" fill="rgba(180,215,245,0.07)"/>
+        <circle cx="114" cy="53" r="10" fill="rgba(180,215,245,0.07)"/>
+        <!-- Lens glare arcs (glass reflection) -->
+        <path d="M77 47.5 Q86 45.5 95 47.5"  stroke="rgba(255,255,255,0.38)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <path d="M105 47.5 Q114 45.5 123 47.5" stroke="rgba(255,255,255,0.38)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         <!-- Bridge -->
         <line x1="97" y1="53" x2="103" y2="53" stroke="#1A1A1A" stroke-width="2.8"/>
         <!-- Temple arms -->
         <line x1="64" y1="49" x2="75" y2="53" stroke="#1A1A1A" stroke-width="2"/>
         <line x1="125" y1="53" x2="136" y2="49" stroke="#1A1A1A" stroke-width="2"/>
 
-        <!-- Lightning bolt scar (glowing gold) -->
+        <!-- Lightning bolt scar -->
         <path id="scarPath"
           d="M98 29 L104 38 L97 38 L103 47"
           stroke="#FFD700" stroke-width="2.8"
           stroke-linecap="round" stroke-linejoin="round"
           fill="none" filter="url(#glowF)"/>
 
-        <!-- Eyebrows (slightly furrowed for HP look) -->
+        <!-- Eyebrows -->
         <path d="M79 43 Q86 40 93 43" stroke="#111111" stroke-width="2.2" fill="none" stroke-linecap="round"/>
         <path d="M107 43 Q114 40 121 43" stroke="#111111" stroke-width="2.2" fill="none" stroke-linecap="round"/>
 
-        <!-- Smile -->
+        <!-- Smile with subtle cheek blush -->
         <path d="M91 66 Q100 73 109 66" stroke="#111111" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+        <ellipse cx="83"  cy="63" rx="5" ry="3" fill="rgba(220,150,100,0.18)"/>
+        <ellipse cx="117" cy="63" rx="5" ry="3" fill="rgba(220,150,100,0.18)"/>
 
-        <!-- LEGO Harry Potter hair piece (black, iconic messy swept style) -->
-        <!-- Main hair body — LEGO hair piece shape -->
+        <!-- LEGO hair piece (black plastic, messy HP style) -->
         <path d="M65 42
                  Q62 13 78 17
                  Q81  5 91 15
@@ -839,26 +1118,32 @@
                  Q120 30 114 36
                  Q108 24 102 33
                  Q101 26 100 31
-                 Q99 26 98 33
+                 Q99  26 98  33
                  Q92 24 86 36
                  Q80 30 74 43
                  Q72 52 66 56 Z"
           fill="#111111"/>
-        <!-- Side sideburns of hair piece -->
-        <rect x="63" y="36" width="5.5" height="20" rx="2.5" fill="#111111"/>
+        <!-- Hair plastic sheen arc -->
+        <path d="M78 17 Q89 10 100 13 Q111 10 122 17"
+          stroke="rgba(255,255,255,0.13)" stroke-width="3" fill="none" stroke-linecap="round"/>
+        <!-- Hair specular -->
+        <ellipse cx="85" cy="20" rx="9" ry="4.5" fill="rgba(255,255,255,0.14)"/>
+        <!-- Sideburns -->
+        <rect x="63"   y="36" width="5.5" height="20" rx="2.5" fill="#111111"/>
         <rect x="131.5" y="36" width="5.5" height="20" rx="2.5" fill="#111111"/>
 
-        <!-- Wand in right hand -->
+        <!-- Wand -->
         <g id="wandGroup">
           <line x1="166" y1="160" x2="184" y2="183" stroke="#5C3010" stroke-width="4" stroke-linecap="round"/>
-          <!-- Wand handle grip (darker section) -->
+          <!-- Wand highlight edge -->
+          <line x1="165" y1="160" x2="183" y2="183" stroke="rgba(130,90,40,0.38)" stroke-width="1.5" stroke-linecap="round"/>
           <ellipse cx="164" cy="158" rx="5.5" ry="3.5" fill="#7A4020" transform="rotate(-50,164,158)"/>
-          <!-- Wand tip glow (animated via JS) -->
+          <ellipse cx="162" cy="156" rx="2.5" ry="1.4" fill="rgba(190,130,70,0.5)" transform="rotate(-50,162,156)"/>
           <circle id="wandTip" cx="184" cy="183" r="0" fill="#FEFFD0" opacity="0" filter="url(#wandF)"/>
         </g>
 
-        <!-- ── Layer 4: LEGO-style outline strokes ── -->
-        <g fill="none" stroke="#0A0A0A" stroke-width="2" stroke-linejoin="round" opacity="0.8">
+        <!-- ── Layer 4: Outline strokes ── -->
+        <g fill="none" stroke="rgba(0,0,0,0.7)" stroke-width="1.8" stroke-linejoin="round">
           <rect x="65" y="22" width="70" height="58" rx="12"/>
           <rect x="82" y="78" width="36" height="18"/>
           <rect x="45" y="94" width="110" height="86" rx="3"/>
@@ -873,7 +1158,7 @@
           <rect x="104" y="283" width="55" height="22" rx="6"/>
         </g>
 
-        <!-- ── Invisible tap zones for easter eggs ── -->
+        <!-- ── Tap zones ── -->
         <rect id="tapGlasses" x="68" y="38" width="64" height="30" fill="transparent" style="cursor:pointer"/>
         <rect id="tapScar"    x="90" y="22" width="22" height="32" fill="transparent" style="cursor:pointer"/>
         <rect id="tapWand"    x="154" y="150" width="40" height="44" fill="transparent" style="cursor:pointer"/>
