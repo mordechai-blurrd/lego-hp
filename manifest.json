@@ -1,7 +1,7 @@
 {
   "name": "HP LEGO Builder",
   "short_name": "HP Builder",
-  "description": "Build a LEGO Harry Potter figure by completing daily quests!",
+  "description": "Build a LEGO Harry Potter figure by completing daily quests and saving money!",
   "start_url": "./index.html",
   "display": "standalone",
   "background_color": "#0D0E1A",
